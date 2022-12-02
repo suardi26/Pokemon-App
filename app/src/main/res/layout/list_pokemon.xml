@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="resultBindData"
+            type="com.practice.pokemon_app.data.remote.response.Result" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewPoke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <ImageView
+                android:id="@+id/pokemon_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                tools:background="@drawable/ic_launcher_background"
+                app:image="@{resultBindData.url}"/>
+
+            <TextView
+                android:id="@+id/textViewPokemonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text='@{resultBindData.name, default=""}'
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Pikacu" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

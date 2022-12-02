@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pokemon_nav_graph"
+    app:startDestination="@id/pokemonListFragment">
+
+    <fragment
+        android:id="@+id/myPokemonFragment"
+        android:name="com.practice.pokemon_app.ui.MyPokemonFragment"
+        android:label="MyPokemonFragment" >
+        <action
+            android:id="@+id/action_myPokemonFragment_to_detailPokemonFragment"
+            app:destination="@id/detailPokemonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonListFragment"
+        android:name="com.practice.pokemon_app.ui.PokemonListFragment"
+        android:label="PokemonListFragment" >
+        <action
+            android:id="@+id/action_pokemonListFragment_to_detailPokemonFragment"
+            app:destination="@id/detailPokemonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPokemonFragment"
+        android:name="com.practice.pokemon_app.ui.DetailPokemonFragment"
+        android:label="DetailPokemonFragment" >
+        <action
+            android:id="@+id/action_detailPokemonFragment_to_pokemonListFragment"
+            app:destination="@id/pokemonListFragment"
+            app:popUpTo="@id/pokemonListFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="myPokemon"
+            app:argType="com.practice.pokemon_app.data.local.MyPokemon" />
+    </fragment>
+</navigation>
