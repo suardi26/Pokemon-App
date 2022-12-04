@@ -9,9 +9,8 @@ import com.practice.pokemon_app.data.local.MyPokemon
 import com.practice.pokemon_app.data.remote.response.Result
 import com.practice.pokemon_app.databinding.ListPokemonBinding
 
-class MyPokemonListAdapter :
+class MyPokemonListAdapter:
     RecyclerView.Adapter<MyPokemonListAdapter.MyPokemonListViewHolder>() {
-
 
     private val differCallback = object : DiffUtil.ItemCallback<MyPokemon>() {
         override fun areItemsTheSame(oldItem: MyPokemon, newItem: MyPokemon): Boolean {
@@ -28,6 +27,7 @@ class MyPokemonListAdapter :
 
     inner class MyPokemonListViewHolder(private val binding: ListPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(myPokemon: MyPokemon) {
             binding.apply {
                 resultBindData = Result(name = myPokemon.name, url = myPokemon.url)
@@ -36,7 +36,6 @@ class MyPokemonListAdapter :
                 }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPokemonListViewHolder {
@@ -57,4 +56,5 @@ class MyPokemonListAdapter :
     fun setOnItemClickListener(listener: (MyPokemon) -> Unit) {
         onItemClickListener = listener
     }
+
 }

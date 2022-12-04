@@ -1,6 +1,7 @@
 package com.practice.pokemon_app.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -21,7 +22,6 @@ class PokemonListAdapter :
             override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 
@@ -31,7 +31,7 @@ class PokemonListAdapter :
         fun bind(result: Result) {
             with(binding) {
 
-                // https://pokeapi.co/api/v2/pokemon/1/
+                // https://pokeapi.co/api/v2/pokemon/1/  -> number = 1
                 val pokeEntries: Int = result.url!!.dropLast(1)
                     .substringAfterLast("/")
                     .toInt()
@@ -46,6 +46,7 @@ class PokemonListAdapter :
                 }
             }
         }
+
     }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
@@ -66,3 +67,4 @@ class PokemonListAdapter :
         onItemClickListener = listener
     }
 }
+
