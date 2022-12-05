@@ -1,7 +1,6 @@
 package com.practice.pokemon_app.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -10,8 +9,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.practice.pokemon_app.R
 import com.practice.pokemon_app.adapter.PokemonListAdapter
-import com.practice.pokemon_app.data.remote.response.Move
-import com.practice.pokemon_app.data.remote.response.Type
 import com.practice.pokemon_app.data.viewmodel.PokemonListViewModel
 import com.practice.pokemon_app.databinding.FragmentPokemonBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,21 +30,19 @@ class PokemonListFragment : Fragment(R.layout.fragment_pokemon) {
             pokemonListAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
-        pokemonListAdapter.setOnItemClickListener { name ->
-
-            viewModel.getPokemon(name)
-
-            viewModel.pokemonDetail.observe(viewLifecycleOwner){ myPoke ->
-
+        viewModel.pokemonDetail.observe(viewLifecycleOwner) { myPoke ->
+            myPoke?.let {
                 action =
                     PokemonListFragmentDirections.actionPokemonListFragmentToDetailPokemonFragment(
                         myPokemon = myPoke
                     )
-
-                action?.let { findNavController().navigate(it) }
-
             }
+            action?.let { findNavController().navigate(it) }
 
+        }
+
+        pokemonListAdapter.setOnItemClickListener { name ->
+            viewModel.getPokemon(name)
         }
 
     }

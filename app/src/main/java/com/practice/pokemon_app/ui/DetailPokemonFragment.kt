@@ -1,7 +1,6 @@
 package com.practice.pokemon_app.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,7 +18,7 @@ class DetailPokemonFragment : Fragment(R.layout.fragment_pokemon_detail) {
 
     private lateinit var binding: FragmentPokemonDetailBinding
     private val viewModel: PokemonListViewModel by activityViewModels()
-    private val args: DetailPokemonFragmentArgs by navArgs<DetailPokemonFragmentArgs>()
+    private val args: DetailPokemonFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -50,7 +49,6 @@ class DetailPokemonFragment : Fragment(R.layout.fragment_pokemon_detail) {
 
                 // Probability 50 % (Ganjil-Genap)
                 val rand = (1..10).shuffled().last()
-                Log.v("TestRand", rand.toString())
 
                 if (rand % 2 == 1) {
                     cardViewCatch.visibility = View.GONE
@@ -93,8 +91,6 @@ class DetailPokemonFragment : Fragment(R.layout.fragment_pokemon_detail) {
         viewModel.checkIdMyPokemon(id)
         viewModel.poke.observe(viewLifecycleOwner) {
             val pokemonCount = it.toInt()
-
-            Log.v("Test Data", pokemonCount.toString())
 
             if (pokemonCount < 1) {
                 binding.apply {

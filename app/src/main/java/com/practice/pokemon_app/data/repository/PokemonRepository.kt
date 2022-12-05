@@ -1,6 +1,5 @@
 package com.practice.pokemon_app.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -12,7 +11,6 @@ import com.practice.pokemon_app.data.remote.api.PokeApi
 import com.practice.pokemon_app.data.remote.response.Pokemon
 import com.practice.pokemon_app.data.remote.response.Result
 import com.practice.pokemon_app.util.Constants.PAGE_SIZE
-import retrofit2.Call
 import retrofit2.Response
 
 class PokemonRepository(

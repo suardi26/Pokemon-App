@@ -60,7 +60,6 @@ class MyPokemonFragment : Fragment(R.layout.fragment_my_pokemon) {
                         viewModel.addPokemon(myPokemon)
                     }
                     .show()
-
             }
 
         }

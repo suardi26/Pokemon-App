@@ -1,24 +1,18 @@
 package com.practice.pokemon_app.data.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.practice.pokemon_app.data.local.MyPokemon
 import com.practice.pokemon_app.data.remote.response.Move
-import com.practice.pokemon_app.data.remote.response.Pokemon
 import com.practice.pokemon_app.data.remote.response.Result
 import com.practice.pokemon_app.data.remote.response.Type
 import com.practice.pokemon_app.data.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,13 +25,12 @@ class PokemonListViewModel @Inject constructor(
         return repository.getPokemonList().cachedIn(viewModelScope)
     }
 
-    private val _pokemonDetail = MutableLiveData<MyPokemon>()
-    val pokemonDetail: LiveData<MyPokemon> get() = _pokemonDetail
+    val pokemonDetail = SingleLiveEvent<MyPokemon>()
 
     fun getPokemon(name: String) {
         viewModelScope.launch {
             val response = repository.getPokemonDetail(name)
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 val pokemon = response.body()
                 pokemon?.let {
                     val myPokemon = MyPokemon(
@@ -50,14 +43,12 @@ class PokemonListViewModel @Inject constructor(
                         url = it.sprites?.front_default,
                         nickname = null
                     )
-                    _pokemonDetail.postValue(myPokemon)
+                    pokemonDetail.postValue(myPokemon)
                 }
             }
 
         }
     }
-
-
 
 
     fun getAllMyPokemon(): LiveData<List<MyPokemon>> {
