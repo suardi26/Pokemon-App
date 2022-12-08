@@ -50,7 +50,7 @@ class DetailPokemonFragment : Fragment(R.layout.fragment_pokemon_detail) {
                 // Probability 50 % (Ganjil-Genap)
                 val rand = (1..10).shuffled().last()
 
-                if (rand % 2 == 1) {
+                if (rand % 2 == 0) {
                     cardViewCatch.visibility = View.GONE
                     cardViewAdd.visibility = View.VISIBLE
                     Toast.makeText(activity, "You have caught a Pokemon !!", Toast.LENGTH_LONG)
